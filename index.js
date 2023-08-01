@@ -7,7 +7,16 @@ class Jugador {
     }
 
     obtenerEleccion() {
-        return prompt(`${this.nombre}, elige: piedra, papel o tijeras`).toLowerCase();
+        let eleccion = prompt(`${this.nombre}, elige: piedra, papel o tijeras`).toLowerCase();
+        if (eleccion === "piedra" || eleccion === "papel" || eleccion === "tijeras") {
+            return eleccion;
+
+        } else {
+            alert("Opción inválida.");
+            this.obtenerEleccion();
+
+        }
+
     }
 
     incrementarPuntos() {
@@ -31,7 +40,7 @@ class Juego {
         const jugador1 = this.jugadores[0];
         const rondas = parseInt(prompt("¿Cuántas rondas quieren jugar?")) || 1;
         for (let ronda = 1; ronda <= rondas; ronda++) {
-            alert(`Ronda: ${rondas}`);
+            alert(`Ronda: ${ronda}`);
             const eleccionJugador1 = jugador1.obtenerEleccion();
             const eleccionMaquina = this.obtenerEleccionComputadora();
             alert(`La máquina eligió: ${eleccionMaquina}`);
@@ -40,7 +49,6 @@ class Juego {
             if (resultado === jugador1.nombre) {
                 jugador1.incrementarPuntos();
             }
-            this.mostrarPuntos();
         }
         this.mostrarPuntos();
         alert("Espero que te hallas divertido, vuelva pronto! ");
@@ -51,9 +59,9 @@ class Juego {
         const jugador2 = this.jugadores[1];
         const rondas = parseInt(prompt("¿Cuántas rondas quieren jugar?")) || 1;
         for (let ronda = 1; ronda <= rondas; ronda++) {
+            alert(`Ronda: ${ronda}`);
             const eleccionJugador1 = jugador1.obtenerEleccion();
             const eleccionJugador2 = jugador2.obtenerEleccion();
-            // alert(`${jugador2.nombre} eligió: ${eleccionJugador2}\n${jugador1.nombre} eligió: ${eleccionJugador1}`);
             const resultado = this.determinarGanador(eleccionJugador1, eleccionJugador2);
             alert(`Ganador: ${resultado}`);
             if (resultado === jugador1.nombre) {
